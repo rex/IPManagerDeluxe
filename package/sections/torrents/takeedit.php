@@ -61,7 +61,7 @@ if(check_perms('torrents_freeleech')) {
 //--------------- Validate data in edit form -----------------------------------//
 
 $DB->query('SELECT UserID, Remastered, RemasterYear, FreeTorrent, info_hash FROM torrents WHERE ID='.$TorrentID);
-list($UserID, $Remastered, $RemasterYear, $CurFreeLeech, $InfoHash) = $DB->next_record(MYSQLI_BOTH, false);
+list($UserID, $Remastered, $RemasterYear, $CurFreeLeech, $InfoHash) = $DB->next_record();
 
 if($LoggedUser['ID']!=$UserID && !check_perms('torrents_edit')) {
 	error(403);

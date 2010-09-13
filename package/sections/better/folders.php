@@ -5,7 +5,7 @@ if(check_perms('admin_reports') && !empty($_GET['remove']) && is_number($_GET['r
 	$DB->query("SELECT GroupID FROM torrents WHERE ID = ".$_GET['remove']);
 	list($GroupID) = $DB->next_record();
 	$Cache->delete_value('torrents_details_'.$GroupID);
-	save_message("Torrent removed from bad folders list");
+	save_message("Torrent removed from bad tag list");
 }
 
 

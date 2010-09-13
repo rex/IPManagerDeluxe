@@ -183,14 +183,6 @@ CREATE TABLE `drives` (
   KEY `Name` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `featured_albums` (
-  `GroupID` int(10) NOT NULL DEFAULT '0',
-  `ThreadID` int(10) NOT NULL DEFAULT '0',
-  `Title` varchar(35) NOT NULL DEFAULT '',
-  `Started` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `Ended` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 CREATE TABLE `forums` (
   `ID` int(6) unsigned NOT NULL AUTO_INCREMENT,
   `CategoryID` tinyint(2) NOT NULL DEFAULT '0',
@@ -760,21 +752,6 @@ CREATE TABLE `tmp_geoip_uploads` (
   `Uploads` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `top10_history` (
-  `ID` int(10) NOT NULL AUTO_INCREMENT,
-  `Date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `Type` enum('Daily','Weekly') DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE `top10_history_torrents` (
-  `HistoryID` int(10) NOT NULL DEFAULT '0',
-  `Rank` tinyint(2) NOT NULL DEFAULT '0',
-  `TorrentID` int(10) NOT NULL DEFAULT '0',
-  `TitleString` varchar(150) NOT NULL DEFAULT '',
-  `TagString` varchar(100) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 CREATE TABLE `top_snatchers` (
   `UserID` int(10) unsigned NOT NULL,
   PRIMARY KEY (`UserID`)
@@ -1066,7 +1043,6 @@ CREATE TABLE `users_info` (
   `Avatar` varchar(255) NOT NULL,
   `Country` int(10) unsigned NOT NULL,
   `AdminComment` text NOT NULL,
-  `LastReadNews` int(10) DEFAULT NULL,
   `SiteOptions` text NOT NULL,
   `ViewAvatars` enum('0','1') NOT NULL DEFAULT '1',
   `Donor` enum('0','1') NOT NULL DEFAULT '0',

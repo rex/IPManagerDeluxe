@@ -235,32 +235,6 @@ ul.thin li { margin:0px 0px; padding:0px; }
 #searchbars ul li {
 	margin: 0px;
 	display: inline;
-		list-style: none;
-		position: relative;
-}
-
-#searchbars ul li ul {
-		display: block;
-        position: absolute;
-        top: 1em;
-		left: 0;
-        z-index: 1000;
-    border: 1px solid #65430F;
-	background: #DCB881;
-    width: 12em;
-    margin-top: 12px;
-}
-
-#searchbars ul li ul li {
-        margin: 0 0 0 0;
-        padding: 0;
-        display: block;
-        width: 100%;
-    text-align: left;
-}
-
-#searchbars ul li ul li.highlight {
-	background: #B27A2E;
 }
 
 li.searchbars {
@@ -774,14 +748,4 @@ ul .invitetree {
 	padding: 0px;
 	z-index:1002;
 	overflow: auto;
-}
-
-.center {
-	text-align: center;
-}
-
-.spellcheck { 
-	margin: 25px 0;
-	font-size: 1.25em;
-	font-weight: bold;
 }

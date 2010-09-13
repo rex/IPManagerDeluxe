@@ -23,9 +23,6 @@ if(empty($_GET['type']) || $_GET['type'] == 'torrents') {
 		case 'tags' :
 			include(SERVER_ROOT.'/sections/top10/tags.php');
 			break;
-		case 'history' :
-			include(SERVER_ROOT.'/sections/top10/history.php');
-			break;
 		default :
 			error(404);
 			break;

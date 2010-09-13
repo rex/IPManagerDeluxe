@@ -236,8 +236,8 @@ ul.thin li { margin:0px 0px; padding:0px; }
 #searchbars ul li {
 	margin: 0px;
 	display: inline;
-		list-style: none;
-		position: relative;
+	list-style: none;
+	position: relative;
 }
 
 #searchbars ul li ul {
@@ -246,10 +246,9 @@ ul.thin li { margin:0px 0px; padding:0px; }
         top: 1em;
 		left: 0;
         z-index: 1000;
-    border: 1px solid #98AAB1;
-	background: #F4F6FB;
-    width: 12em;
-    margin-top: 12px;
+        border : 1px solid #000;
+        width: 12em;
+        margin-top: 12px;
 }
 
 #searchbars ul li ul li {
@@ -257,11 +256,6 @@ ul.thin li { margin:0px 0px; padding:0px; }
         padding: 0;
         display: block;
         width: 100%;
-    text-align: left;
-}
-
-#searchbars ul li ul li.highlight {
-	background: #C6D3E4;
 }
 
 li.searchbars {
@@ -755,14 +749,4 @@ ul .invitetree {
 	padding: 0px;
 	z-index:1002;
 	overflow: auto;
-}
-
-.center {
-	text-align: center;
-}
-
-.spellcheck { 
-	margin: 25px 0;
-	font-size: 1.25em;
-	font-weight: bold;
 }

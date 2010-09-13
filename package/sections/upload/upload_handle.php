@@ -333,7 +333,7 @@ $HasCue = "'0'";
 foreach($FileList as $File) {
 	list($Size, $Name) = $File;
 	// add +log to encoding
-	if($T['Encoding'] == "'Lossless'" && preg_match('/\.log$/i', $Name)) {
+	if($T['Encoding'] == "'Lossless'" && preg_match('/\.log$/i', $Name) && isset($_FILES['logfiles'])) {
 		$HasLog = "'1'";
 	}
 	// add +cue to encoding
@@ -375,8 +375,8 @@ $TorrentText = $Tor->enc();
 
 // Infohash
 
-$InfoHash = pack("H*", sha1($Tor->Val['info']->enc()));
-$DB->query("SELECT ID FROM torrents WHERE info_hash='".db_string($InfoHash)."'");
+$InfoHash = $DB->escape_str(pack("H*", sha1($Tor->Val['info']->enc())));
+$DB->query("SELECT ID FROM torrents WHERE info_hash='$InfoHash'");
 if($DB->record_count()>0) {
 	list($ID) = $DB->next_record();
 	$Err = '<a href="torrents.php?torrentid='.$ID.'">The exact same torrent file already exists on the site!</a>';
@@ -592,15 +592,8 @@ $DB->query("INSERT IGNORE INTO users_points (UserID, GroupID, Points) VALUES ('$
 // Torrent
 $DB->query("
 	INSERT INTO torrents
-		(GroupID, UserID, Media, Format, Encoding, 
-		Remastered, RemasterYear, RemasterTitle, RemasterRecordLabel, RemasterCatalogueNumber, 
-		Scene, HasLog, HasCue, info_hash, FileCount, FileList, FilePath, Size, Time, 
-		Description, LogScore, freetorrent, FreeLeechType) 
-	VALUES
-		(".$GroupID.", ".$LoggedUser['ID'].", ".$T['Media'].", ".$T['Format'].", ".$T['Encoding'].", 
-		".$T['Remastered'].", ".$T['RemasterYear'].", ".$T['RemasterTitle'].", ".$T['RemasterRecordLabel'].", ".$T['RemasterCatalogueNumber'].", 
-		".$T['Scene'].", ".$HasLog.", ".$HasCue.", '".db_string($InfoHash)."', ".$NumFiles.", ".$FileString.", '".$FilePath."', ".$TotalSize.", '".sqltime()."',
-		".$T['TorrentDescription'].", '".(($HasLog == "'1'") ? $LogScoreAverage : 0)."', '0', '0')");
+	(GroupID, UserID, Media, Format, Encoding, Remastered, RemasterYear, RemasterTitle, RemasterRecordLabel, RemasterCatalogueNumber, Scene, HasLog, HasCue, info_hash, FileCount, FileList, FilePath, Size, Time, Description, LogScore, freetorrent, FreeLeechType) VALUES
+	($GroupID, $LoggedUser[ID], $T[Media], $T[Format], $T[Encoding], $T[Remastered], $T[RemasterYear], $T[RemasterTitle], $T[RemasterRecordLabel], $T[RemasterCatalogueNumber], $T[Scene], $HasLog, $HasCue, '$InfoHash', $NumFiles, $FileString, '".$FilePath."', $TotalSize, '".sqltime()."', $T[TorrentDescription], '".(($HasLog=="'1'")?$LogScoreAverage:0)."', '0', '0')");
 
 $Cache->increment('stats_torrent_count');
 $TorrentID = $DB->inserted_id();
@@ -643,7 +636,6 @@ if (!empty($LogScores) && $HasLog) {
 	foreach ($LogScores as $LogKey => $LogScore) { $LogScores[$LogKey] = "$TorrentID,$LogScore,1,0,0,NULL"; }
 	$LogQuery .= implode('),(', $LogScores).')';
 	$DB->query($LogQuery);
-	$LogInDB = true;
 }
 
 //******************************************************************************//
@@ -675,7 +667,7 @@ if($Type == 'Music'){
 	$Announce .= "[".trim($Properties['Year'])."] - ";
 	$Announce .= trim($Properties['Format'])." / ".trim($Properties['Bitrate']);
 	if ($HasLog == "'1'") { $Announce .= " / Log"; }
-	if ($LogInDB) { $Announce .= " / ".$LogScoreAverage.'%'; }
+	if ($LogScoreAverage != 0) { $Announce .= " / ".$LogScoreAverage.'%'; }
 	if ($HasCue == "'1'") { $Announce .= " / Cue"; }
 	$Announce .= " / ".trim($Properties['Media']);
 	if ($Properties['Scene'] == "1") { $Announce .= " / Scene"; }

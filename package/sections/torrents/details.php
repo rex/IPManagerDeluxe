@@ -291,7 +291,7 @@ foreach ($TorrentList as $Torrent) {
 	
 	list($TorrentID, $Media, $Format, $Encoding, $Remastered, $RemasterYear, $RemasterTitle, $RemasterRecordLabel, $RemasterCatalogueNumber, 
 		$Scene, $HasLog, $HasCue, $LogScore, $FileCount, $Size, $Seeders, $Leechers, $Snatched, $FreeTorrent, $TorrentTime, $Description, 
-		$FileList, $FilePath, $UserID, $Username, $LastActive, $BadTags, $BadFolders, $LastReseedRequest, $LogInDB) = $Torrent;
+		$FileList, $FilePath, $UserID, $Username, $LastActive, $BadTags, $BadFolders, $LastReseedRequest) = $Torrent;
 
 	if($Remastered && !$RemasterYear) {
 		if(!isset($FirstUnknown)) {
@@ -356,7 +356,7 @@ foreach ($TorrentList as $Torrent) {
 	if($Format) { $ExtraInfo.=display_str($Format); $AddExtra=' / '; }
 	if($Encoding) { $ExtraInfo.=$AddExtra.display_str($Encoding); $AddExtra=' / '; }
 	if($HasLog) { $ExtraInfo.=$AddExtra.'Log'; $AddExtra=' / '; }
-	if($LogInDB) { $ExtraInfo.=' ('.(int) $LogScore.'%)'; }
+	if($LogScore) { $ExtraInfo.=' ('.(int) $LogScore.'%)'; }
 	if($HasCue) { $ExtraInfo.=$AddExtra.'Cue'; $AddExtra=' / '; }
 	if($Media) { $ExtraInfo.=$AddExtra.display_str($Media); $AddExtra=' / '; }
 	if($Scene) { $ExtraInfo.=$AddExtra.'Scene'; $AddExtra=' / '; }

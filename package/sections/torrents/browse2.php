@@ -315,14 +315,6 @@ if(!empty($Results['notfound'])) {
 
 $Results = $Results['matches'];
 
-$AdvancedSearch = false;
-$Action = 'action=basic';
-if(((!empty($_GET['action']) && strtolower($_GET['action'])=="advanced") || (!empty($LoggedUser['SearchType']) && ((!empty($_GET['action']) && strtolower($_GET['action'])!="basic") || empty($_GET['action'])))) && check_perms('site_advanced_search')) {
-	$AdvancedSearch = true;
-	$Action = 'action=advanced';
-}
-
-
 
 
 show_header('Browse Torrents','browse');
@@ -336,16 +328,24 @@ $Pages=get_pages($Page,$TorrentCount,TORRENTS_PER_PAGE);
 <div class="filter_torrents">
 	<h3>
 		Filter		
-<? if($AdvancedSearch) { ?>
-			(<a href="torrents.php?<? if(!empty($LoggedUser['SearchType'])) { ?>action=basic&amp;<? } echo get_url(array('action')); ?>">Basic Search</a>)
-<? } else { ?>
+<? 
+	if(check_perms('site_advanced_search')) {
+		if((empty($_GET['action']) && empty($LoggedUser['SearchType'])) || (!empty($_GET['action']) && strtolower($_GET['action'])=="basic")) { ?>
 			(<a href="torrents.php?action=advanced&amp;<?=get_url(array('action'))?>">Advanced Search</a>)
-<? } 
+<? 		} elseif((empty($_GET['action']) && !empty($LoggedUser['SearchType'])) || (!empty($_GET['action']) && strtolower($_GET['action'])!="basic")) { ?>
+			(<a href="torrents.php?<? if(!empty($LoggedUser['SearchType'])) { ?>action=basic&amp;<? } echo get_url(array('action')); ?>">Basic Search</a>)
+<? 		} 
+	}
 ?>
 	</h3>
 	<div class="box pad">
 		<table>
-<? if($AdvancedSearch) { ?>
+<? $AdvancedSearch = false;
+	$Action = 'action=basic';
+   if(((!empty($_GET['action']) && strtolower($_GET['action'])=="advanced") || (!empty($LoggedUser['SearchType']) && ((!empty($_GET['action']) && strtolower($_GET['action'])!="basic") || empty($_GET['action'])))) && check_perms('site_advanced_search')) {
+	$AdvancedSearch = true;
+	$Action = 'action=advanced';
+?>
 			<tr>
 				<td class="label">Artist Name:</td>
 				<td colspan="3">
@@ -585,9 +585,7 @@ if (!empty($LoggedUser['DefaultSearch'])) {
 </form>
 
 <div class="linkbox"><?=$Pages?></div>
-<? 
 
-?>
 <? if(count($Results)==0) {
 $DB->query("SELECT 
 	tags.Name,

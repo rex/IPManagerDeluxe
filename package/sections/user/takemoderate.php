@@ -65,7 +65,6 @@ if($SendHackedMail && !empty($_POST['HackedEmail'])) {
 } else {
 	$SendHackedMail = false;
 }
-$MergeStatsFrom = db_string($_POST['MergeStatsFrom']);
 $Reason = db_string($_POST['Reason']);
 
 $HeavyUpdates = array();
@@ -398,7 +397,6 @@ if ($EnableUser!=$Cur['Enabled'] && check_perms('users_disable_users')) {
 		$CanLeech = 1;
 		$UpdateSet[]="m.can_leech='1'";
 		$LightUpdates['Enabled'] = 1;
-		
 	}
 	$Cache->replace_value('enabled_'.$UserID, $EnableUser, 0);
 }
@@ -430,19 +428,6 @@ Once you are connected to our server you'll need to join our disabled channel.
 Type: /join #".NONSSL_SITE_URL."-disabled
 
 Please visit us soon so we can help you resolve this matter.");
-}
-
-if ($MergeStatsFrom && check_perms('users_edit_ratio')) {
-	$DB->query("SELECT ID, Uploaded, Downloaded FROM users_main WHERE Username LIKE '".$MergeStatsFrom."'");
-	if($DB->record_count() > 0) {
-		list($MergeID, $MergeUploaded, $MergeDownloaded) = $DB->next_record();
-		$DB->query("UPDATE users_main AS um JOIN users_info AS ui ON um.ID=ui.UserID SET um.Uploaded = 0, um.Downloaded = 0, ui.AdminComment = CONCAT('".sqltime()." - Stats merged into http://".NONSSL_SITE_URL."/user.php?id=".$UserID." (".$Cur['Username'].") by ".$LoggedUser['Username']."\n\n', ui.AdminComment) WHERE ID = ".$MergeID);
-		$UpdateSet[]="Uploaded = Uploaded + '$MergeUploaded'";
-		$UpdateSet[]="Downloaded = Downloaded + '$MergeDownloaded'";
-		$EditSummary[]="stats merged from http://".NONSSL_SITE_URL."/user.php?id=".$MergeID." (".$MergeStatsFrom.")";
-		$Cache->delete_value('users_stats_'.$UserID);
-		$Cache->delete_value('users_stats_'.$MergeID);
-	}
 }
 
 if ($Pass && check_perms('users_edit_password')) {

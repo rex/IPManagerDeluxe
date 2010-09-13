@@ -345,20 +345,17 @@ ul.thin li {
         top: 1em;
 		left: 0;
         z-index: 1000;
+        border : 1px solid #EEE;
+		background: url('images/content.png');
         width: 12em;
         margin-top: 12px;
 }
 
 #searchbars ul li ul li {
-        margin: 0
+        margin: 1px 0 1px 4px;
         padding: 0;
         display: block;
         width: 100%;
-	background: #303030;
-}
-
-#searchbars ul li ul li.highlight {
-	background: #454545;
 }
 
 #searchbars ul li form {
@@ -870,14 +867,4 @@ table#torrent_table.torrent_table {
 
 form tr {
 	background-color: #222222;
-}
-
-.center {
-	text-align: center;
-}
-
-.spellcheck { 
-	margin: 25px 0;
-	font-size: 1.25em;
-	font-weight: bold;
 }

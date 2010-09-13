@@ -10,9 +10,7 @@ if($_POST['submit'] == 'Delete'){
 		error("1");
 	}
 	
-	
 	$DB->query('DELETE FROM xbt_client_whitelist WHERE id='.$_POST['id']);
-	
 } else { //Edit & Create, Shared Validation
 	
 	if(empty($_POST['client']) || empty($_POST['peer_id'])) {
@@ -27,19 +25,16 @@ if($_POST['submit'] == 'Delete'){
 		if(empty($_POST['id']) || !is_number($_POST['id'])) {
 			error("3");
 		} else {
-			
 			$DB->query("UPDATE xbt_client_whitelist SET
 				vstring='".$Client."',
 				peer_id='".$PeerID."'
 				WHERE ID=".$_POST['id']);
-			
 		}
 	} else { //Create
 		$DB->query("INSERT INTO xbt_client_whitelist
 			(vstring, peer_id) 
 		VALUES
 			('".$Client."','".$PeerID."')");
-		
 	}
 }
 

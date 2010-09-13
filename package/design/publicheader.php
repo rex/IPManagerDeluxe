@@ -12,7 +12,7 @@ define('FOOTER_FILE',SERVER_ROOT.'/design/publicfooter.php');
 	<link rel="shortcut icon" href="favicon.ico" />
 <? if ($Mobile) { ?>
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0, user-scalable=no;"/>
-	<link href="<?=STATIC_SERVER ?>styles/mobile/style.css?v=<?=filemtime(SERVER_ROOT.'/static/mobile/style.css')?>" rel="stylesheet" type="text/css" />
+	<link href="<?=STATIC_SERVER ?>styles/mobile/style.css" rel="stylesheet" type="text/css" />
 <? } else { ?>
 	<link href="<?=STATIC_SERVER ?>styles/public/style.css?v=<?=filemtime(SERVER_ROOT.'/static/styles/public/style.css')?>" rel="stylesheet" type="text/css" />
 <? } ?>
@@ -23,7 +23,7 @@ define('FOOTER_FILE',SERVER_ROOT.'/design/publicfooter.php');
 	<script src="<?=STATIC_SERVER?>functions/class_storage.js?v=<?=filemtime(SERVER_ROOT.'/static/functions/class_storage.js')?>" type="text/javascript"></script>
 	<script src="<?=STATIC_SERVER?>functions/global.js?v=<?=filemtime(SERVER_ROOT.'/static/functions/global.js')?>" type="text/javascript"></script>
 <? if ($Mobile) { ?>
-	<script src="<?=STATIC_SERVER?>styles/mobile/style.js?v=<?=filemtime(SERVER_ROOT.'/static/mobile/style.js')?>" type="text/javascript" async="async"></script>
+	<script src="<?=STATIC_SERVER?>styles/mobile/style.js" type="text/javascript" async="async"></script>
 <? } 
 
 ?>

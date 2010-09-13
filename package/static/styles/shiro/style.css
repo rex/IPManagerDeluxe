@@ -300,36 +300,11 @@ ul.thin li {
 
 #searchbars ul {
 	margin: 0 auto;
-	display: block;
 }
 
 #searchbars ul li {
 	display: inline;
 	margin: 0px 1px;
-	list-style: none;
-	position: relative;
-}
-
-#searchbars ul li ul {
-		display: block;
-        position: absolute;
-        z-index: 1000;
-        width: 12em;
-        top: 1em;
-        left: 0;
-        margin-top: 12px;
-}
-
-#searchbars ul li ul li {
-        margin: 0
-        padding: 0;
-        display: block;
-        width: 100%;
-	background: #eee;
-}
-
-#searchbars ul li ul li.highlight {
-	background: #ccc;
 }
 
 #searchbars ul li form {
@@ -846,14 +821,4 @@ table#torrent_table.torrent_table {
 
 form tr {
 	background-color: #DDD;
-}
-
-.center {
-	text-align: center;
-}
-
-.spellcheck { 
-	margin: 25px 0;
-	font-size: 1.25em;
-	font-weight: bold;
 }

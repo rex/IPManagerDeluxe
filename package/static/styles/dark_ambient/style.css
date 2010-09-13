@@ -434,32 +434,6 @@ margin-left:20px;
 #searchbars ul li {
 	display: inline;
 	padding-right:15px;
-	list-style: none;
-	position: relative;
-}
-
-#searchbars ul li ul {
-		display: block;
-        position: absolute;
-        top: 1em;
-        z-index: 1000;
-		border: 1px solid #181818;
-		background: #252525 url('images/content_main_x.png') top left repeat-x;
-        width: 12em;
-        margin-top: 12px;
-}
-
-#searchbars ul li ul li {
-        margin: 1px 0 1px 4px;
-        padding: 0;
-        display: block;
-        width: 100%;
-		color: #878787;
-	cursor: pointer;
-}
-
-#searchbars ul li ul li.highlight {
-	color: #007DC6;
 }
 
 *:first-child+html #searchbars ul li {
@@ -1975,14 +1949,4 @@ ul#userinfo_random li a {
 
 ul#userinfo_random li a:hover {
 	color: #ffffff;
-}
-
-.center {
-	text-align: center;
-}
-
-.spellcheck { 
-	margin: 25px 0;
-	font-size: 1.25em;
-	font-weight: bold;
 }

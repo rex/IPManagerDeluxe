@@ -104,15 +104,6 @@ show_header('Edit torrent group');
 						<input type="text" name="catalogue_number" size="40" value="<?=$CatalogueNumber?>" />
 					</td>
 				</tr>								
-<? if(check_perms('torrents_freeleech')) { ?>
-				<tr>
-					<td class="label">Freeleech <strong>Group</strong></td>
-					<td>
-						<input type="checkbox" name="freeleech" /> Freeleech
-						<input type="checkbox" name="unfreeleech" /> Un-Freeleech
-					</td>
-				</tr>	
-<? } ?>
 			</table>
 			<input type="submit" value="Edit" />
 		</form>

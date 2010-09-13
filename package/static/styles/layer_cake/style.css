@@ -268,10 +268,6 @@ ul.thin li { margin:0px 0px; padding:0px; }
         width: 100%;
 }
 
-#searchbars ul li ul li.highlight {
-	background: #D7D7D7;
-}
-
 #searchbars ul li form {
 	display: inline;
 }
@@ -765,14 +761,4 @@ ul .invitetree {
 	padding: 0px;
 	z-index:1002;
 	overflow: auto;
-}
-
-.center {
-	text-align: center;
-}
-
-.spellcheck { 
-	margin: 25px 0;
-	font-size: 1.25em;
-	font-weight: bold;
 }

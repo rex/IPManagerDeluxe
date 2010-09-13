@@ -136,7 +136,7 @@ switch($_GET['type']) {
 		if(!check_perms('users_view_uploaded') && $UserID != $LoggedUser['ID'] && $Paranoia>=3) { error(403); }
 		$Time = 'unix_timestamp(t.Time)';
 		$UserField = 't.UserID';
-		$ExtraWhere = 'AND flags!=1';
+		$ExtraWhere = 'AND flags=0';
 		$From = "torrents AS t";
 		break;
 	case 'downloaded':

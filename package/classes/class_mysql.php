@@ -170,8 +170,9 @@ class DB_MYSQL {
 		if ($this->Errno == 1194) { send_irc('PRIVMSG '.ADMIN_CHAN.' :'.$this->Error); }
 		/*if ($this->Errno == 1194) { 
 			preg_match("Table '(\S+)' is marked as crashed and should be repaired", $this->Error, $Matches);
-		} */
-		$Debug->analysis('!dev DB Error',$DBError,3600*24);
+			if($Matches
+			send_irc('PRIVMSG '.ADMIN_CHAN.' :'.$this->Error); } */
+		//$Debug->analysis('!dev DB Error',$DBError,3600*24);
 		if (DEBUG_MODE || check_perms('site_debug') || $argv[1]==SCHEDULE_KEY) {
 			echo '<pre>'.$DBError.'</pre>';
 			print_r($this->Queries);
@@ -313,10 +314,10 @@ class DB_MYSQL {
 	}
 
 	//  Loops through the result set, collecting the $Key column into an array
-	function collect($Key, $Escape = true) {
+	function collect($Key) {
 		$Return = array();
 		while($Row = mysqli_fetch_array($this->QueryID)){
-			$Return[] = $Escape ? display_str($Row[$Key]) : $Row[$Key];
+			$Return[]=display_str($Row[$Key]);
 		}
 		mysqli_data_seek($this->QueryID, 0);
 		return $Return;

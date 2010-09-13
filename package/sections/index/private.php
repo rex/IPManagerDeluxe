@@ -2,35 +2,11 @@
 include(SERVER_ROOT.'/classes/class_text.php');
 $Text = new TEXT;
 
-if (!$News = $Cache->get_value('news')) {
-	$DB->query("SELECT
-		ID,
-		Title,
-		Body,
-		Time
-		FROM news
-		ORDER BY Time DESC
-		LIMIT 5");
-	$News = $DB->to_array(false,MYSQLI_NUM,false);
-	$Cache->cache_value('news',$News,3600*24*30);
-	$Cache->cache_value('news_latest_id', $News[0][0], 0);
-}
-
-if ($LoggedUser['LastReadNews'] != $News[0][0]) {
-	$Cache->begin_transaction('user_info_heavy_'.$UserID);
-	$Cache->update_row(false, array('LastReadNews' => $News[0][0]));
-	$Cache->commit_transaction(0);
-	$DB->query("UPDATE users_info SET LastReadNews = '".$News[0][0]."' WHERE UserID = ".$UserID);
-	$LoggedUser['LastReadNews'] = $News[0][0];
-}
-
 show_header('News');
 show_message();
 ?>
 <div class="thin">
 	<div class="sidebar">
-<?
-?>
 		<div class="box">
 			<div class="head colhead_dark"><strong>Stats</strong></div>
 			<ul class="stats nobullet">
@@ -333,10 +309,22 @@ $Cache->increment('usage_index');
 <!-- END recommendations section -->
 <?
 }
+if (!$News = $Cache->get_value('news')) {
+	$DB->query("SELECT
+		ID,
+		Title,
+		Body,
+		Time
+		FROM news
+		ORDER BY Time DESC
+		LIMIT 5");
+	$News = $DB->to_array(false,MYSQLI_NUM,false);
+	$Cache->cache_value('news',$News,3600*24*30);
+}
 $Count = 0;
 foreach ($News as $NewsItem) {
 	list($NewsID,$Title,$Body,$NewsTime) = $NewsItem;
-	if (strtotime($NewsTime) > time()) {
+	if (strtotime($NewsTime) >= time()) {
 		continue;
 	}
 ?>

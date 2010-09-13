@@ -32,9 +32,6 @@ if(!empty($_GET['e']) && in_array($_GET['e'],$Errors)) {
 			notify(STATUS_CHAN,'PHP-0');
 			break;
 		case '-1':
-			$Title = "Invalid request";
-			$Description = "Something was wrong with your request and the server is refusing to fulfill it.";
-			break;
 		default:
 			if(!empty($Error)) {
 				$Title = 'Error';

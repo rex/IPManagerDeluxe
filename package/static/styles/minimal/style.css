@@ -140,10 +140,8 @@ textarea#quickpost{margin:0; padding:0}
         z-index: 1000;
         background: #262626 url(http://what.cd/static/styles/minimal/images/bg.png) repeat-x 0 -3px;
         border: 1px solid #757575;
+        width: 12em;
         margin-top: 12px;
-        white-space: nowrap;
-		overflow: hidden;
-
 }
 
 #searchbars ul li ul li {
@@ -491,14 +489,3 @@ h3{margin:10px 0}
 .cats_elearningvideos{width:30px; height:30px; background:url(images/icons/elearning.png) top left no-repeat}
 .cats_comedy{width:30px; height:30px; background:url(images/icons/comedy.png) top left no-repeat}
 .cats_comics{width:30px; height:30px; background:url(images/icons/comics.png) top left no-repeat}
-
-
-.center {
-	text-align: center;
-}
-
-.spellcheck { 
-	margin: 10px 0;
-	font-size: 1.25em;
-	font-weight: bold;
-}

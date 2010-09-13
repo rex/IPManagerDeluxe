@@ -5,9 +5,8 @@ function get_group_info($GroupID, $Return = true, $RevisionID = 0) {
 	if(!$RevisionID) {
 		$TorrentCache=$Cache->get_value('torrents_details_'.$GroupID);
 	}
-	
-	//TODO: Remove LogInDB at a much later date.
-	if($RevisionID || !is_array($TorrentCache) || !isset($TorrentCache[1][0]['LogInDB'])) {
+
+	if($RevisionID || !is_array($TorrentCache)) {
 		// Fetch the group details
 
 		$SQL = "SELECT ";
@@ -84,16 +83,13 @@ function get_group_info($GroupID, $Return = true, $RevisionID = 0) {
 			t.last_action,
 			tbt.TorrentID,
 			tbf.TorrentID,
-			t.LastReseedRequest,
-			tln.TorrentID AS LogInDB
+			t.LastReseedRequest
 			FROM torrents AS t
 			LEFT JOIN users_main AS um ON um.ID=t.UserID
 			LEFT JOIN torrents_bad_tags AS tbt ON tbt.TorrentID=t.ID
 			LEFT JOIN torrents_bad_folders AS tbf on tbf.TorrentID=t.ID
-			LEFT JOIN torrents_logs_new AS tln ON tln.TorrentID=t.ID
 			WHERE t.GroupID='".db_string($GroupID)."'
 			AND flags != 1
-			GROUP BY t.ID
 			ORDER BY t.Remastered ASC, (t.RemasterYear <> 0) DESC, t.RemasterYear ASC, t.RemasterTitle ASC, t.RemasterRecordLabel ASC, t.RemasterCatalogueNumber ASC, t.Format DESC, t.Encoding, t.ID");
 
 		$TorrentList = $DB->to_array();

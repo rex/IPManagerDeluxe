@@ -206,7 +206,6 @@ if ($ThreadInfo['NoPoll'] == 0) {
 				$Cache->cache_value('staff_names', $StaffNames, 1800);
 			}
 
-
 			$DB->query("SELECT fpv.Vote AS Vote,
 						GROUP_CONCAT(um.Username SEPARATOR ', ')
 						FROM users_main AS um 

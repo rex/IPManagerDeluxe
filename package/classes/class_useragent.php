@@ -124,9 +124,8 @@ class USER_AGENT {
 		if (strpos($UserAgentString, 'iPad')) {
 			return false;
 		}
-		
-		//Mobi catches Mobile
-		if (/*strpos($UserAgentString, 'Mobile') || */strpos($UserAgentString, 'Device') || strpos($UserAgentString, 'Mobi') || strpos($UserAgentString, 'Mini') || strpos($UserAgentString, 'webOS')) {
+	
+		if (strpos($UserAgentString, 'Mobile') || strpos($UserAgentString, 'Device') || strpos($UserAgentString, 'Mobi') || strpos($UserAgentString, 'Mini')) {
 			return true;
 		}
 		return false;

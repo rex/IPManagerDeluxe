@@ -155,9 +155,9 @@ function validDate($DateString) {
 	$SplitTime = explode(":", $Time);
 	if(count($SplitTime) != 3) return false;
 	list($H, $M, $S) = $SplitTime;
-	if($H != 0 && !(is_number($H) && $H < 24 && $H >= 0)) return false;
-	if($M != 0 && !(is_number($M) && $M < 60 && $M >= 0)) return false;
-	if($S != 0 && !(is_number($S) && $S < 60 && $S >= 0)) return false;
+	if(!(is_number($H) && $H < 24 && $H >= 0)) return false;
+	if(!(is_number($M) && $M < 60 && $M >= 0)) return false;
+	if(!(is_number($S) && $S < 60 && $S >= 0)) return false;
 	$SplitDate = explode("-", $Date);
 	if(count($SplitDate) != 3) return false;
 	list($Y, $M, $D) = $SplitDate;

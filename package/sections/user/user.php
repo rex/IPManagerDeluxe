@@ -462,7 +462,7 @@ if ($Snatched > 4 && $Paranoia < 2) {
 		$Cache->cache_value('recent_snatches_'.$UserID, $RecentSnatches, 0); //inf cache
 	}
 ?>
-	<table class="recent" cellpadding="0" cellspacing="0" border="0">
+	<table cellpadding="0" cellspacing="0" border="0">
 		<tr class="colhead">
 			<td colspan="5">Recent Snatches</td>
 		<tr>
@@ -502,7 +502,7 @@ if ($Uploads > 4 && $Paranoia < 3) {
 		$Cache->cache_value('recent_uploads_'.$UserID, $RecentUploads, 0); //inf cache
 	}
 ?>
-	<table class="recent" cellpadding="0" cellspacing="0" border="0">
+	<table cellpadding="0" cellspacing="0" border="0">
 		<tr class="colhead">
 			<td colspan="5">Recent Uploads</td>
 		<tr>
@@ -529,7 +529,7 @@ if($CollageID) {
 	$Collage = $DB->to_array();
 
 ?>
-	<table class="recent" cellpadding="0" cellspacing="0" border="0">
+	<table cellpadding="0" cellspacing="0" border="0">
 		<tr class="colhead">
 			<td colspan="5"><?=display_str($Name)?> - <a href="collages.php?id=<?=$CollageID?>">see full</a></td>
 		<tr>
@@ -765,12 +765,6 @@ if($DB->record_count() > 0) {
 				<td>
 					<input type="hidden" name="OldDownloaded" value="<?=$Downloaded?>" />
 					<input type="text" size="20" name="Downloaded" value="<?=$Downloaded?>" />
-				</td>
-			</tr>
-			<tr>
-				<td class="label">Merge Stats <strong>From:</strong></td>
-				<td>
-					<input type="text" size="40" name="MergeStatsFrom" />
 				</td>
 			</tr>
 <?

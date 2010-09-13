@@ -76,7 +76,6 @@ switch($_REQUEST['action']) {
 		$CollageID = $DB->inserted_id();
 		header('Location: collage.php?id='.$CollageID);
 		die();
-
 	default:
 		if(!empty($_GET['id'])) {
 			require(SERVER_ROOT.'/sections/collages/collage.php');

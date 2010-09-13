@@ -80,8 +80,7 @@ define('TORRENT_GROUP_REGEX', SITELINK_REGEX.'\/torrents.php\?id=\d{1,10}\&(torr
 $Browser = $UA->browser($_SERVER['HTTP_USER_AGENT']);
 $OperatingSystem = $UA->operating_system($_SERVER['HTTP_USER_AGENT']);
 //$Mobile = $UA->mobile($_SERVER['HTTP_USER_AGENT']);
-$Mobile = in_array($_SERVER['HTTP_HOST'], array('m.'.NONSSL_SITE_URL, 'm.'.NONSSL_SITE_URL));
-
+$Mobile = false;
 
 /*
 if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR'] != $_SERVER['REMOTE_ADDR']) {
@@ -208,6 +207,11 @@ if(isset($LoginCookie)) {
 	
 	// Because we <3 our staff
 	if (check_perms('site_disable_ip_history')) { $_SERVER['REMOTE_ADDR'] = '127.0.0.1'; }
+
+	//Dik-dik temporary access
+	if (check_perms('users_mod')|| $LoggedUser['ID'] == 236) {
+		$Mobile = $UA->mobile($_SERVER['HTTP_USER_AGENT']);
+	}
 
 	// Update LastUpdate every 10 minutes
 	if(strtotime($UserSessions[$SessionID]['LastUpdate'])+600<time()) {
@@ -976,7 +980,6 @@ function delete_torrent($ID, $GroupID=0) {
 	
 	
 	$DB->query("UPDATE torrents SET flags=1 WHERE ID = '$ID'"); // Let xbtt delete the torrent
-	
 	$Cache->decrement('stats_torrent_count');
 
 	$DB->query("SELECT COUNT(ID) FROM torrents WHERE GroupID='$GroupID' AND flags <> 1");
@@ -1197,7 +1200,7 @@ function update_hash($GroupID) {
 		GROUP_CONCAT(DISTINCT t.Format SEPARATOR ' ') AS Format,
 		GROUP_CONCAT(DISTINCT t.Encoding SEPARATOR ' ') AS Encoding,
 		GROUP_CONCAT(DISTINCT t.RemasterTitle SEPARATOR ' ') AS RemasterTitle,
-		GROUP_CONCAT(REPLACE(REPLACE(REPLACE(FileList, '|||', '\n '), '_', ' '), '.', ' ') SEPARATOR '\n ') AS FileList
+		GROUP_CONCAT(REPLACE(REPLACE(FileList, '|||', '\n '), '_', ' ') SEPARATOR '\n ') AS FileList
 		FROM torrents AS t
 		JOIN torrents_group AS g ON g.ID=t.GroupID
 		WHERE g.ID=$GroupID
