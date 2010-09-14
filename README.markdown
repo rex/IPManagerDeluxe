@@ -1,5 +1,7 @@
-IPManagerDeluxe - A comprehensive IPv4 and IPv6 addressing management solution
-==============================================================================
+IPManagerDeluxe
+===============
+
+IPManagerDeluxe is a comprehensive IPv4 and IPv6 addressing management solution that allows for rapid development of IP-based functionalities.
 
 Requirements
 ------------
